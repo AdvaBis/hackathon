@@ -3,7 +3,7 @@ from geopy.geocoders import Nominatim
 
 lat=31
 lon=35
-# city="Tel Aviv"
+city="Tel Aviv"
 
 
 def find_cord(city):
