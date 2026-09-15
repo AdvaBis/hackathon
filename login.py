@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-"""This is just a simple authentication example.
-
-Please see the `OAuth2 example at FastAPI <https://fastapi.tiangolo.com/tutorial/security/simple-oauth2/>`_  or
-use the great `Authlib package <https://docs.authlib.org/en/v0.13/client/starlette.html#using-fastapi>`_ to implement a classing real authentication system.
-Here we just demonstrate the NiceGUI integration.
-"""
 from fastapi import Request
 from fastapi.responses import RedirectResponse
 from starlette.middleware.base import BaseHTTPMiddleware

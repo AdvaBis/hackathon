@@ -1,9 +1,8 @@
 from nicegui import ui
-lat=31
-lon=35
 
-def map_page(lat, lon):
+def map_page(lat=31, lon=35):
     ui.leaflet(center=(lat, lon), zoom=10)
+    return None
 
 fullscreen=ui.fullscreen()
-ui.run(map_page(lat, lon))
+ui.run(map_page())
