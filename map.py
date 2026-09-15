@@ -5,7 +5,6 @@ lat=31
 lon=35
 city="Tel Aviv"
 
-
 def find_cord(city):
     geolocator = Nominatim(user_agent="MyApp")
     location = geolocator.geocode(str(city))
