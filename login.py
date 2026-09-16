@@ -136,7 +136,9 @@ def signup_page():
         # passwords['Username'] = password
 
 
-        ui.button('Sign Up', on_click=lambda: '/main_page').classes('w-full bg-primary text-white')
+        # ui.button('Sign Up', on_click = main_page1).classes('w-full bg-primary text-white')
+        ui.link('SIGN UP', '/main_page').classes('mt-4 text-2xl self-center')
+
         ui.link('Already have an account? Log in', '/login').classes('mt-4 text-sm self-center')
 
 
