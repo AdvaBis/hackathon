@@ -5,7 +5,8 @@ from geopy.geocoders import Nominatim
 from uuid import uuid4
 from html_sanitizer import Sanitizer
 from langchain_openai import ChatOpenAI
-
+import chats
+import chat_bot
 
 
 
@@ -32,24 +33,24 @@ def main_map():
     longitude = cord[1]
     find_pos(latitude, longitude)
 
+@ui.page('/')
+def main():
+    label = ui.label()
+    ui.timer(1.0, lambda: label.set_text(f'{datetime.now():%X}'))
+    with ui.tabs().classes('w-full') as tabs:
+        one = ui.tab('Map')
+        two = ui.tab('Chat')
+        tree = ui.tab('chat bot')
+    with ui.tab_panels(tabs, value=two).classes('w-full'):
+        with ui.tab_panel(one):
+            ui.link_target(main_map())
+        with ui.tab_panel(two):
+            ui.link("LINK", target="/chat")
+        with ui.tab_panel(tree):
+            ui.link("LINK", target="/chat_bot")
 
 
-
-label = ui.label()
-ui.timer(1.0, lambda: label.set_text(f'{datetime.now():%X}'))
-with ui.tabs().classes('w-full') as tabs:
-    one = ui.tab('Map')
-    two = ui.tab('Chat')
-    tree=ui.tab('chat bot')
-with ui.tab_panels(tabs, value=two).classes('w-full'):
-    with ui.tab_panel(one):
-        ui.link_target(main_map())
-    with ui.tab_panel(two):
-        ui.label('agam akziza')
-    with ui.tab_panel(tree):
-        ui.label('alma')
 ui.run()
-
 
 
 

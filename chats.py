@@ -16,7 +16,7 @@ def chat_messages(own_id: str) -> None:
     ui.run_javascript('window.scrollTo(0, document.body.scrollHeight)')
 
 
-@ui.page('/')
+@ui.page('/chat')
 async def main():
     def send() -> None:
         stamp = datetime.now().strftime('%X')
@@ -42,5 +42,7 @@ async def main():
         chat_messages(user_id)
 
 
-if __name__ in {'__main__', '__mp_main__'}:
-    ui.run()
+def main_run():
+    main()
+
+main_run()
