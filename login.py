@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-"""This is just a simple authentication example.
-
-Please see the `OAuth2 example at FastAPI <https://fastapi.tiangolo.com/tutorial/security/simple-oauth2/>`_  or
-use the great `Authlib package <https://docs.authlib.org/en/v0.13/client/starlette.html#using-fastapi>`_ to implement a classing real authentication system.
-Here we just demonstrate the NiceGUI integration.
-"""
 from fastapi import Request
 from fastapi.responses import RedirectResponse
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -15,7 +8,7 @@ from nicegui import app, ui
 passwords = {'user1': 'pass1', 'user2': 'pass2'}
 
 # top-level static routes like /favicon.ico must be unrestricted, otherwise the middleware redirects them to /login
-unrestricted_page_routes = {'/favicon.ico', '/login'}
+unrestricted_page_routes = {'/favicon.ico', '/login', '/signup'}
 
 
 @app.add_middleware
@@ -53,6 +46,7 @@ def login(redirect_to: str = '/') -> RedirectResponse | None:
     if app.storage.user.get('authenticated'):
         return RedirectResponse('/')
 
+
     def try_login() -> None:
         if passwords.get(username.value) == password.value:
             app.storage.user.update(username=username.value, authenticated=True)
@@ -60,12 +54,42 @@ def login(redirect_to: str = '/') -> RedirectResponse | None:
         else:
             ui.notify('Wrong username or password', color='negative')
 
+
     with ui.card().classes('absolute-center items-stretch'):
         username = ui.input('Username').props('autofocus').on('keydown.enter', lambda: password.run_method('focus'))
         password = ui.input('Password', password=True, password_toggle_button=True).on('keydown.enter', try_login)
         ui.button('Log in', on_click=try_login)
+        ui.link('dont have an account? sign up', '/signup').classes('mt-4 text-sm self-center')
+
 
     return None
+
+from nicegui import ui
+
+
+
+
+
+
+@ui.page('/signup')
+def signup_page():
+    # def handle_signup():
+    #         return ui.label(f'Account created for {username.value}!', color='positive')
+
+    with ui.card().classes('absolute-center p-6 w-80'):
+        ui.label('Create Account').classes('text-2xl font-bold mb-4')
+
+        username = ui.input('Username').classes('w-full mb-2')
+        email = ui.input('Email').classes('w-full mb-2')
+        city = ui.input('City').classes('w-full mb-2')
+        password = ui.input('Password', password=True, password_toggle_button=True).classes('w-full mb-2')
+        confirm_password = ui.input('Confirm Password', password=True, password_toggle_button=True).classes(
+            'w-full mb-4')
+
+        # passwords['Username'] = password
+
+        ui.button('Sign Up').classes('w-full bg-primary text-white')
+        ui.link('Already have an account? Log in', '/login').classes('mt-4 text-sm self-center')
 
 
 if __name__ in {'__main__', '__mp_main__'}:
