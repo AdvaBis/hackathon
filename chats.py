@@ -7,7 +7,7 @@ messages: list[tuple[str, str, str, str]] = []
 
 
 @ui.refreshable
-def chat_messages(own_id: str) -> None:
+def chat_messages(own_id: str) -> other_user:
     if messages:
         for user_id, avatar, text, stamp in messages:
             ui.chat_message(text=text, stamp=stamp, avatar=avatar, sent=own_id == user_id)
@@ -18,7 +18,7 @@ def chat_messages(own_id: str) -> None:
 
 @ui.page('/')
 async def main():
-    def send() -> None:
+    def send() -> other_user:
         stamp = datetime.now().strftime('%X')
         messages.append((user_id, avatar, text.value, stamp))
         text.value = ''
