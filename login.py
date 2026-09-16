@@ -103,7 +103,7 @@ def signup_page():
         username = ui.input('Username').classes('w-full mb-2')
         email = ui.input('Email').classes('w-full mb-2')
         ui.label('City')
-        cities = ui.select(israel_cities)
+        city = ui.select(israel_cities)
         password = ui.input('Password', password=True, password_toggle_button=True).classes('w-full mb-2')
         confirm_password = ui.input('Confirm Password', password=True, password_toggle_button=True).classes(
             'w-full mb-4')

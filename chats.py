@@ -42,7 +42,4 @@ async def main():
         chat_messages(user_id)
 
 
-def main_run():
-    ui.run()
-
-main_run()
+ui.run()
