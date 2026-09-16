@@ -34,6 +34,7 @@ def main_map():
 
 
 
+
 label = ui.label()
 ui.timer(1.0, lambda: label.set_text(f'{datetime.now():%X}'))
 with ui.tabs().classes('w-full') as tabs:
