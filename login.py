@@ -1,7 +1,7 @@
 from fastapi import Request
 from fastapi.responses import RedirectResponse
 from starlette.middleware.base import BaseHTTPMiddleware
-
+import test
 from nicegui import app, ui
 
 israel_cities = [
@@ -53,7 +53,8 @@ def main_page() -> None:
         ui.navigate.to('/login')
 
     with ui.column().classes('absolute-center items-center'):
-        ui.label(f'Hello {app.storage.user["username"]}!').classes('text-2xl')
+        test.test()
+        # call main
         ui.button(on_click=logout, icon='logout').props('outline round')
 
 
