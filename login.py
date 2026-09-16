@@ -52,6 +52,7 @@ def main_page() -> None:
         app.storage.user.clear()
         ui.navigate.to('/login')
 
+
     with ui.column().classes('absolute-center items-center'):
 
 
