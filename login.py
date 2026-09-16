@@ -25,6 +25,18 @@ israel_cities = [
     "Hadera"
 ]
 
+
+hobbies = [
+    "Dance",
+    "Sing",
+    "Work Out",
+    "Sleep",
+    "Read",
+    "Gaming",
+    "Cook",
+    "Bake",
+]
+
 # in reality users passwords would obviously need to be hashed
 passwords = {'user1': 'pass1', 'user2': 'pass2'}
 
@@ -107,6 +119,8 @@ def signup_page():
         password = ui.input('Password', password=True, password_toggle_button=True).classes('w-full mb-2')
         confirm_password = ui.input('Confirm Password', password=True, password_toggle_button=True).classes(
             'w-full mb-4')
+        ui.label('Hobbie')
+        hobby = ui.select(hobbies)
 
         # passwords['Username'] = password
 
