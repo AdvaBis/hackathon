@@ -1,9 +1,25 @@
 from nicegui import ui
+from geopy.geocoders import Nominatim
+
 lat=31
 lon=35
+city="Tel Aviv"
 
-def map_page(lat, lon):
-    ui.leaflet(center=(lat, lon), zoom=10)
+def find_cord(city):
+    geolocator = Nominatim(user_agent="MyApp")
+    location = geolocator.geocode(str(city))
+    cord=(location.latitude,location.longitude)
+    return cord
 
-fullscreen=ui.fullscreen()
-ui.run(map_page(lat, lon))
+
+cord=find_cord(city)
+latitude=cord[0]
+longitude=cord[1]
+
+
+def find_pos(latitude,longitude):
+    m= ui.leaflet(center=(latitude,longitude))
+    marker = m.marker(latlng=(latitude,longitude))
+
+
+ui.run(find_pos(latitude,longitude))
