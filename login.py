@@ -4,6 +4,27 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 from nicegui import app, ui
 
+israel_cities = [
+    "Jerusalem",
+    "Tel Aviv-Yafo",
+    "Haifa",
+    "Rishon LeZion",
+    "Petah Tikva",
+    "Ashdod",
+    "Netanya",
+    "Beer Sheva",
+    "Holon",
+    "Bnei Brak",
+    "Ramat Gan",
+    "Rehovot",
+    "Bat Yam",
+    "Herzliya",
+    "Kfar Sava",
+    "Hadera",
+    "Modi'in-Maccabim-Reut",
+    "Nazareth"
+]
+
 # in reality users passwords would obviously need to be hashed
 passwords = {'user1': 'pass1', 'user2': 'pass2'}
 
@@ -81,7 +102,8 @@ def signup_page():
 
         username = ui.input('Username').classes('w-full mb-2')
         email = ui.input('Email').classes('w-full mb-2')
-        city = ui.input('City').classes('w-full mb-2')
+        ui.label('City')
+        cities = ui.select(israel_cities)
         password = ui.input('Password', password=True, password_toggle_button=True).classes('w-full mb-2')
         confirm_password = ui.input('Confirm Password', password=True, password_toggle_button=True).classes(
             'w-full mb-4')
