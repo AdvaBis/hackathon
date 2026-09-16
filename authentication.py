@@ -48,6 +48,7 @@ def test_page() -> None:
     ui.label('This is a sub page.')
 
 
+
 @ui.page('/login')
 def login(redirect_to: str = '/') -> RedirectResponse | None:
     if app.storage.user.get('authenticated'):
