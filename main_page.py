@@ -49,6 +49,7 @@ def main():
         with ui.tab_panel(tree):
             ui.link("LINK", target="/chat_bot")
 
+
 ui.run()
 
 
