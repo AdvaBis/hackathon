@@ -1,6 +1,7 @@
 from fastapi import Request
 from fastapi.responses import RedirectResponse
 from starlette.middleware.base import BaseHTTPMiddleware
+
 from nicegui import app, ui
 from datetime import datetime
 import map
@@ -26,6 +27,7 @@ israel_cities = [
     "Kfar Sava",
     "Hadera"
 ]
+
 
 hobbies = [
     "Dance",
@@ -131,6 +133,7 @@ def signup_page():
         # passwords['Username'] = password
 
         ui.button('Sign Up', on_click=lambda: '/main_page').classes('w-full bg-primary text-white')
+        ui.button('Sign Up',on_click=lambda: '/main_page').classes('w-full bg-primary text-white')
         ui.link('Already have an account? Log in', '/login').classes('mt-4 text-sm self-center')
 
 
