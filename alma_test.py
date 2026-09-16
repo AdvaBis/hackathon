@@ -1,20 +1,53 @@
 from datetime import datetime
 from nicegui import ui
+from nicegui import ui
+from geopy.geocoders import Nominatim
+from uuid import uuid4
+#map
+# def find_cord(city):
+#     geolocator = Nominatim(user_agent="MyApp")
+#     location = geolocator.geocode(str(city))
+#     cord=(location.latitude,location.longitude)
+#     return cord
+#
+# def find_pos(latitude,longitude):
+#     m= ui.leaflet(center=(latitude,longitude))
+#     marker = m.marker(latlng=(latitude,longitude))
+# #
+# #
+# #
+# def main_map():
+#     lat = 31
+#     lon = 35
+#     city = "Tel Aviv"
+#     cord = find_cord(city)
+#     latitude = cord[0]
+#     longitude = cord[1]
+#     find_pos(latitude, longitude)
+
+
 label = ui.label()
 ui.timer(1.0, lambda: label.set_text(f'{datetime.now():%X}'))
-
-
-
 with ui.tabs().classes('w-full') as tabs:
-    one = ui.tab('One')
-    two = ui.tab('Two')
+    one = ui.tab('Map')
+    two = ui.tab('Chat')
 with ui.tab_panels(tabs, value=two).classes('w-full'):
     with ui.tab_panel(one):
-        ui.label('First tab')
+        ui.link_target(main_map())
     with ui.tab_panel(two):
-        ui.label('Second tab')
-
-
-
-
+        ui.link_target(main_chat())
 ui.run()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
