@@ -33,7 +33,7 @@ def main_map():
     longitude = cord[1]
     find_pos(latitude, longitude)
 
-@ui.page('/')
+@ui.page('/main_page')
 def main():
     label = ui.label()
     ui.timer(1.0, lambda: label.set_text(f'{datetime.now():%X}'))
