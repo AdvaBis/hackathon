@@ -1,6 +1,7 @@
 from nicegui import ui
 from geopy.geocoders import Nominatim
 
+
 lat=31
 lon=35
 city="Tel Aviv"
