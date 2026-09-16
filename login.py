@@ -8,6 +8,10 @@ import map
 from geopy.geocoders import Nominatim
 from nicegui import ui
 
+import chat_bot
+import chats
+
+
 israel_cities = [
     "Jerusalem",
     "Tel Aviv-Yafo",
@@ -65,7 +69,7 @@ class AuthMiddleware(BaseHTTPMiddleware):
 
 
 @ui.page('/')
-def main_page() -> None:
+def main_login() -> None:
     def logout() -> None:
         app.storage.user.clear()
         ui.navigate.to('/login')
@@ -73,7 +77,7 @@ def main_page() -> None:
     with ui.column().classes('absolute-center items-center'):
         # call main
         # TODO
-        ui.link('GO TO MAIN PAGE', '/main_page')
+        ui.link("go to ",target='/main_page1')
         ui.button(on_click=logout, icon='logout').props('outline round')
 
 
@@ -98,7 +102,7 @@ def login(redirect_to: str = '/') -> RedirectResponse | None:
     return None
 
 
-@ui.page('/main_page')
+@ui.page('/main_page1')
 def main_page1():
     label = ui.label()
     ui.timer(1.0, lambda: label.set_text(f'{datetime.now():%X}'))
@@ -110,9 +114,11 @@ def main_page1():
         with ui.tab_panel(one):
             ui.link_target(map.map_run())
         with ui.tab_panel(two):
-            ui.link("LINK", target="/chat")
+            with ui.link(target='/chat'):
+                ui.button(icon='chat')
         with ui.tab_panel(tree):
-            ui.link("LINK", target="/chat_bot")
+            with ui.link(target='/chat_bot'):
+                ui.button(icon='chat')
 
 
 @ui.page('/signup')
