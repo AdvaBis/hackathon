@@ -46,6 +46,8 @@ passwords = {'user1': 'pass1', 'user2': 'pass2'}
 # top-level static routes like /favicon.ico must be unrestricted, otherwise the middleware redirects them to /login
 unrestricted_page_routes = {'/favicon.ico', '/login', '/signup', '/main_page'}
 
+OPENAI_API_KEY = 'not-set'
+
 
 @app.add_middleware
 class AuthMiddleware(BaseHTTPMiddleware):
@@ -133,7 +135,6 @@ def signup_page():
         # passwords['Username'] = password
 
         ui.button('Sign Up', on_click=lambda: '/main_page').classes('w-full bg-primary text-white')
-        ui.button('Sign Up',on_click=lambda: '/main_page').classes('w-full bg-primary text-white')
         ui.link('Already have an account? Log in', '/login').classes('mt-4 text-sm self-center')
 
 
