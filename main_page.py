@@ -7,34 +7,35 @@ from html_sanitizer import Sanitizer
 from langchain_openai import ChatOpenAI
 import chats
 import chat_bot
-
+import map
 
 
 OPENAI_API_KEY = 'not-set'
 #map
-def find_cord(city):
-    geolocator = Nominatim(user_agent="MyApp")
-    location = geolocator.geocode(str(city))
-    cord=(location.latitude,location.longitude)
-    return cord
-
-def find_pos(latitude,longitude):
-    m= ui.leaflet(center=(latitude,longitude))
-    marker = m.marker(latlng=(latitude,longitude))
-#
-#
-#
-def main_map():
-    lat = 31
-    lon = 35
-    city = "Tel Aviv"
-    cord = find_cord(city)
-    latitude = cord[0]
-    longitude = cord[1]
-    find_pos(latitude, longitude)
 
 @ui.page('/')
 def main():
+    # def find_cord(city):
+#     geolocator = Nominatim(user_agent="MyApp")
+#     location = geolocator.geocode(str(city))
+#     cord=(location.latitude,location.longitude)
+#     return cord
+#
+# def find_pos(latitude,longitude):
+#     m= ui.leaflet(center=(latitude,longitude))
+#     marker = m.marker(latlng=(latitude,longitude))
+# #
+# #
+# #
+# def main_map():
+#     lat = 31
+#     lon = 35
+#     city = "Tel Aviv"
+#     cord = find_cord(city)
+#     latitude = cord[0]
+#     longitude = cord[1]
+#     find_pos(latitude, longitude)
+
     label = ui.label()
     ui.timer(1.0, lambda: label.set_text(f'{datetime.now():%X}'))
     with ui.tabs().classes('w-full') as tabs:
@@ -43,7 +44,7 @@ def main():
         tree = ui.tab('chat bot')
     with ui.tab_panels(tabs, value=two).classes('w-full'):
         with ui.tab_panel(one):
-            ui.link_target(main_map())
+            ui.link_target(map.map_run())
         with ui.tab_panel(two):
             ui.link("LINK", target="/chat")
         with ui.tab_panel(tree):

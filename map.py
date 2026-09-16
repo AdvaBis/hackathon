@@ -22,5 +22,5 @@ def find_pos(latitude,longitude):
     m= ui.leaflet(center=(latitude,longitude))
     marker = m.marker(latlng=(latitude,longitude))
 
-
-ui.run(find_pos(latitude,longitude))
+def map_run():
+    find_pos(latitude,longitude)
