@@ -60,6 +60,7 @@ def login(redirect_to: str = '/') -> RedirectResponse | None:
 
     return None
 
+def
 
 if __name__ in {'__main__', '__mp_main__'}:
     ui.run(storage_secret='THIS_NEEDS_TO_BE_CHANGED')

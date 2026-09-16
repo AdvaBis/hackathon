@@ -4,6 +4,6 @@ import login
 import map
 
 def main():
-    ...
+    chats.main_run()
 
 main()
