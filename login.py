@@ -3,6 +3,9 @@ from fastapi.responses import RedirectResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from nicegui import app, ui
+from datetime import datetime
+import map
+from geopy.geocoders import Nominatim
 from nicegui import ui
 
 israel_cities = [
@@ -42,7 +45,9 @@ hobbies = [
 passwords = {'user1': 'pass1', 'user2': 'pass2'}
 
 # top-level static routes like /favicon.ico must be unrestricted, otherwise the middleware redirects them to /login
-unrestricted_page_routes = {'/favicon.ico', '/login', '/signup'}
+unrestricted_page_routes = {'/favicon.ico', '/login', '/signup', '/main_page'}
+
+OPENAI_API_KEY = 'not-set'
 
 
 @app.add_middleware
@@ -66,7 +71,9 @@ def main_page() -> None:
         ui.navigate.to('/login')
 
     with ui.column().classes('absolute-center items-center'):
-        ui.label(f'Hello {app.storage.user["username"]}!').classes('text-2xl')
+        # call main
+        # TODO
+        ui.link('GO TO MAIN PAGE', '/main_page')
         ui.button(on_click=logout, icon='logout').props('outline round')
 
 
@@ -75,7 +82,6 @@ def login(redirect_to: str = '/') -> RedirectResponse | None:
     if app.storage.user.get('authenticated'):
         return RedirectResponse('/')
 
-
     def try_login() -> None:
         if passwords.get(username.value) == password.value:
             app.storage.user.update(username=username.value, authenticated=True)
@@ -83,13 +89,30 @@ def login(redirect_to: str = '/') -> RedirectResponse | None:
         else:
             ui.notify('Wrong username or password', color='negative')
 
-
     with ui.card().classes('absolute-center items-stretch'):
         username = ui.input('Username').props('autofocus').on('keydown.enter', lambda: password.run_method('focus'))
         password = ui.input('Password', password=True, password_toggle_button=True).on('keydown.enter', try_login)
         ui.button('Log in', on_click=try_login)
         ui.link('dont have an account? sign up', '/signup').classes('mt-4 text-sm self-center')
+
     return None
+
+
+@ui.page('/main_page')
+def main_page1():
+    label = ui.label()
+    ui.timer(1.0, lambda: label.set_text(f'{datetime.now():%X}'))
+    with ui.tabs().classes('w-full') as tabs:
+        one = ui.tab('Map')
+        two = ui.tab('Chat')
+        tree = ui.tab('chat bot')
+    with ui.tab_panels(tabs, value=two).classes('w-full'):
+        with ui.tab_panel(one):
+            ui.link_target(map.map_run())
+        with ui.tab_panel(two):
+            ui.link("LINK", target="/chat")
+        with ui.tab_panel(tree):
+            ui.link("LINK", target="/chat_bot")
 
 
 @ui.page('/signup')
@@ -111,9 +134,13 @@ def signup_page():
         hobby = ui.select(hobbies)
 
         # passwords['Username'] = password
-        with ui.link(target='/main_page'):
-            ui.button('Sign Up').classes('w-full bg-primary text-white')
+
+
+        # ui.button('Sign Up', on_click = main_page1).classes('w-full bg-primary text-white')
+        ui.link('SIGN UP', '/main_page').classes('mt-4 text-2xl self-center')
+
         ui.link('Already have an account? Log in', '/login').classes('mt-4 text-sm self-center')
+
 
 if __name__ in {'__main__', '__mp_main__'}:
     ui.run(storage_secret='THIS_NEEDS_TO_BE_CHANGED')

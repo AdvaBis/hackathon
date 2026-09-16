@@ -45,4 +45,3 @@ async def main():
 def main_run():
     main()
 
-main_run()
