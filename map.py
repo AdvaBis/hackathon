@@ -1,6 +1,8 @@
 from nicegui import ui
 from geopy.geocoders import Nominatim
 
+
+pos_list = []
 lat=31
 lon=35
 city="Tel Aviv"
@@ -18,8 +20,10 @@ longitude=cord[1]
 
 
 def find_pos(latitude,longitude):
+    global pos_list
     m= ui.leaflet(center=(latitude,longitude))
     marker = m.marker(latlng=(latitude,longitude))
+    pos_list.append(marker)
 
 
 ui.run(find_pos(latitude,longitude))

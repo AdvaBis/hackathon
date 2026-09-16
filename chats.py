@@ -42,5 +42,7 @@ async def main():
         chat_messages(user_id)
 
 
-if __name__ in {'__main__', '__mp_main__'}:
+def main_run():
     ui.run()
+
+main_run()
