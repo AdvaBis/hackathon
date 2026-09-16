@@ -5,6 +5,8 @@ from geopy.geocoders import Nominatim
 from uuid import uuid4
 from html_sanitizer import Sanitizer
 from langchain_openai import ChatOpenAI
+from nicegui.elements import icon
+
 import chats
 import chat_bot
 
@@ -33,7 +35,7 @@ def main_map():
     longitude = cord[1]
     find_pos(latitude, longitude)
 
-@ui.page('/')
+@ui.page('/main_page')
 def main():
     label = ui.label()
     ui.timer(1.0, lambda: label.set_text(f'{datetime.now():%X}'))
@@ -45,9 +47,11 @@ def main():
         with ui.tab_panel(one):
             ui.link_target(main_map())
         with ui.tab_panel(two):
-            ui.link("LINK", target="/chat")
+            with ui.link( target="/chat"):
+                ui.button(icon='chat')
         with ui.tab_panel(tree):
-            ui.link("LINK", target="/chat_bot")
+            with ui.link(target="/chat_bot"):
+                ui.button(icon='chat')
 
 
 ui.run()
