@@ -13,7 +13,7 @@ import map
 OPENAI_API_KEY = 'not-set'
 #map
 
-@ui.page('/')
+@ui.page('/main_page')
 def main():
     # def find_cord(city):
 #     geolocator = Nominatim(user_agent="MyApp")

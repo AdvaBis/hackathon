@@ -6,6 +6,7 @@ from nicegui import app, ui
 from datetime import datetime
 import map
 from geopy.geocoders import Nominatim
+from nicegui import ui
 
 israel_cities = [
     "Jerusalem",
@@ -133,6 +134,7 @@ def signup_page():
         hobby = ui.select(hobbies)
 
         # passwords['Username'] = password
+
 
         ui.button('Sign Up', on_click=lambda: '/main_page').classes('w-full bg-primary text-white')
         ui.link('Already have an account? Log in', '/login').classes('mt-4 text-sm self-center')
