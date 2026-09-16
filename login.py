@@ -119,9 +119,8 @@ def signup_page():
 
         # passwords['Username'] = password
 
-        ui.button('Sign Up').classes('w-full bg-primary text-white')
+        ui.button('Sign Up',on_click=lambda: '/main_page').classes('w-full bg-primary text-white')
         ui.link('Already have an account? Log in', '/login').classes('mt-4 text-sm self-center')
-
 
 if __name__ in {'__main__', '__mp_main__'}:
     ui.run(storage_secret='THIS_NEEDS_TO_BE_CHANGED')
